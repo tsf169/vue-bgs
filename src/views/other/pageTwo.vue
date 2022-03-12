@@ -1,9 +1,9 @@
 <template>
-  <div>我是USegggggr页面</div>
+  <div>我是pagetwo页面</div>
 </template>
 <script>
 export default {
-  name: "User",
+  name: "page2",
   data() {
     return {};
   },

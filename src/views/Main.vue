@@ -1,18 +1,17 @@
-
-//整体的页面文档
 <template>
   <div>
     <el-container style="height: 100%">
       <el-aside width="auto">
-        //侧边的组件在页面上显示
+        <!-- //侧边的组件在页面上显示 -->
         <common-aside></common-aside>
       </el-aside>
       <el-container>
+        <!-- 首页的组件显示 -->
         <el-header>
-          //头部的组件在上面显示
           <common-header />
         </el-header>
         <el-main>
+          <!-- 这是我们页面功能区显示的地方 -->
           <router-view></router-view>
         </el-main>
       </el-container>
