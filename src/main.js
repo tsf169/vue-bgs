@@ -42,6 +42,7 @@ new Vue({
   router,
   store,
   render: h => h(App),
+  // 解决页面刷新之后白屏的问题
   created() {
     store.commit('addMenu', router)
   }

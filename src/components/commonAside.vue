@@ -90,9 +90,11 @@ export default {
     isCollapse() {
       return this.$store.state.tab.isCollapse;
     },
+    // 获取当前的menu，因为之前没有menu，但登录之后就有menu，在getMenu函数中会从cookie中获得menu
     asyncMenu() {
       return this.$store.state.tab.menu;
     },
   },
 };
 </script>
+ 

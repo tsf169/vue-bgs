@@ -14,3 +14,11 @@ export const getData = () => {
         //默认get请求
     })
 }
+
+export const getUser = (params) => {
+    return axios.request({
+        url: '/user/getUser',
+        method: 'GET',
+        params
+    })
+}

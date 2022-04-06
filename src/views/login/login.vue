@@ -74,18 +74,25 @@ export default {
       // if (form.username === "admin" && form.password === "123456") {
       //   this.$router.push({ name: "home" });
       // }
-      // 调用getmenu接口
+      // 调用是mockgetmenu接口
+      //es6语法将data从res中解构出来
       getMenu(this.form).then(({ data: res }) => {
         if (res.code === 200) {
+          //如果返回的数据中code是200
           console.log(res, "res");
+          //在store/tab.js定义clearMenu先清除menu
           this.$store.commit("clearMenu");
+          //然后调用设置setMenu，将传过来的menu放入cookie中
           this.$store.commit("setMenu", res.data.menu);
+            //然后调用设置setToken，将token放入cookie中
           this.$store.commit("setToken", res.data.token);
           //动态添加路由
           this.$store.commit("addMenu", this.$router);
+          //路由跳转到home页面
           this.$router.push({ name: "home" });
         } else {
           // element.ui的message组件
+          //如果有错误的话将抛出warning
           this.$message.warning(res.data.message);
         }
       });

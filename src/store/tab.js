@@ -56,35 +56,48 @@ export default {
             }
         },
         setMenu(state, val) {
+            // 将传过来的menu放入cookie中 避免在浏览器刷新的时候丢失mneu数据
+            //将传过来的val值放入menu中
             state.menu = val
             //大写的JSON
             Cookie.set('menu', JSON.stringify(val))
         },
         clearMenu(state) {
+            //将menu清空
             state.menu = []
+            // 将cookie中的menu清空
             Cookie.remove('menu')
         },
         addMenu(state, router) {
+            // 如果cookie中没有值会返回开始的页面
             if (!Cookie.get('menu')) {
                 return
             }
+            //定义menu，然后是从cookie中的取出menu的值放入其中 后转成对象
             const menu = JSON.parse(Cookie.get('menu'))
+            // 将menu状态中原为空的值改为传过来的的值
             state.menu = menu
+            // 将其中分为有children的和没有chirldren的
             const menuArray = []
+            // 对menu数据进行遍历 forEach
             menu.forEach(item => {
                 if (item.children) {
+                    // 要动态添加路由  对数据中的url进行拼接 路由的跳转在router/index.js中要有component所以要把他挑出来拼接到一起
                     item.children = item.children.map(item => {
                         item.component = () =>
+                            // 将component用其mock中的路由模拟出来的 在permission.js中 然后用模板字符串拼接成component
                             import(`../views/${item.url}`)
                         return item
                     })
-                    console.log(item);
+                    // ...item.children解构item.children
                     menuArray.push(...item.children)
+                    console.log(item.children);
+                    // 如果他是一个一级菜单 
                 } else {
                     item.component = () => import(`../views/${item.url}`)
                     menuArray.push(item)
                 }
-                console.log(item);
+
             });
             // 路由的动态添加  用forEach遍历menuArray
             menuArray.forEach(item => {

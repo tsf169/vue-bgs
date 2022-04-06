@@ -82,9 +82,13 @@ export default {
     handleMenu() {
       this.$store.commit("collaspeMenu");
     },
+    // 退出页面的函数
     logout() {
+      // 清空token
       this.$store.commit("clearToken");
+      // 清空菜单
       this.$store.commit("clearMenu");
+      // 路由返回login
       this.$router.push("/login");
     },
   },
